@@ -1,0 +1,62 @@
+# ==========================================
+# Dependencies (Frontend & Backend)
+# ==========================================
+node_modules/
+*/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ==========================================
+# Environment Variables & Secrets
+# ==========================================
+.env
+.env.*
+!.env.example
+*.local
+
+# ==========================================
+# Production & Build Outputs
+# ==========================================
+dist/
+*/dist/
+dist-ssr/
+build/
+coverage/
+
+# ==========================================
+# Logs & Temp files
+# ==========================================
+logs/
+*.log
+*.tmp
+*.temp
+.eslintcache
+*.tsbuildinfo
+
+# ==========================================
+# Vite & Framework Specific
+# ==========================================
+*.timestamp-*-*.mjs
+.vite/
+
+# ==========================================
+# IDE & Code Editors
+# ==========================================
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ==========================================
+# Operating System Files
+# ==========================================
+.DS_Store
+Thumbs.db
+desktop.ini
