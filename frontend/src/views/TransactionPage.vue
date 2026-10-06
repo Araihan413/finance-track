@@ -20,10 +20,10 @@ const selectedType = ref('all');
 const selectedCategory = ref('all');
 const sortBy = ref('latest');
 
-// Categories list from backend with type support
+// Daftar kategori dari backend dengan dukungan tipe data
 const rawCategories = ref([]);
 
-// Categories available for filtering based on selected transaction type
+// Kategori yang tersedia untuk filter berdasarkan jenis transaksi yang dipilih
 const availableFilterCategories = computed(() => {
   if (selectedType.value === 'all') {
     return rawCategories.value;
@@ -33,12 +33,12 @@ const availableFilterCategories = computed(() => {
   );
 });
 
-// Check if any filter is active
+// Periksa apakah ada filter yang aktif
 const hasActiveFilter = computed(() => {
   return searchQuery.value !== '' || selectedType.value !== 'all' || selectedCategory.value !== 'all' || sortBy.value !== 'latest';
 });
 
-// Reset all filters
+// Reset semua filter ke default
 const resetFilters = () => {
   searchQuery.value = '';
   selectedType.value = 'all';
@@ -48,7 +48,7 @@ const resetFilters = () => {
   loadTransactions();
 };
 
-// Fetch categories from backend
+// Ambil kategori dari backend
 const loadCategories = async () => {
   try {
     const res = await fetch('http://localhost:3000/api/kategori');
@@ -65,7 +65,7 @@ const loadCategories = async () => {
   }
 };
 
-// Fetch transactions with filter & pagination from backend
+// Mengambil transaksi dengan filter & paginasi dari backend.
 const loadTransactions = async () => {
   isLoading.value = true;
   try {
@@ -83,7 +83,7 @@ const loadTransactions = async () => {
     if (result.success) {
       let data = result.data;
 
-      // Handle client-side sorting if needed
+      // Lakukan pengurutan di sisi klien jika diperlukan
       if (sortBy.value === 'highest') {
         data.sort((a, b) => Number(b.jumlah) - Number(a.jumlah));
       } else if (sortBy.value === 'lowest') {

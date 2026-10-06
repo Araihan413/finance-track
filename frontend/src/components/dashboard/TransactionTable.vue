@@ -17,57 +17,11 @@ defineProps({
   },
   transactions: {
     type: Array,
-    default: () => [
-      {
-        id: 1,
-        date: '01/10/2024',
-        category: 'Makan',
-        subCategory: 'Makan Siang',
-        type: 'Keluar',
-        description: 'Nasi Padang',
-        amount: -50000,
-      },
-      {
-        id: 2,
-        date: '30/09/2024',
-        category: 'Gaji',
-        subCategory: null,
-        type: 'Masuk',
-        description: 'Gaji Bulanan PT Maju',
-        amount: 5000000,
-      },
-      {
-        id: 3,
-        date: '28/09/2024',
-        category: 'Transport',
-        subCategory: null,
-        type: 'Keluar',
-        description: 'Bensin Motor & Tol',
-        amount: -75000,
-      },
-      {
-        id: 4,
-        date: '25/09/2024',
-        category: 'Freelance',
-        subCategory: null,
-        type: 'Masuk',
-        description: 'Desain Banner Website',
-        amount: 750000,
-      },
-      {
-        id: 5,
-        date: '24/09/2024',
-        category: 'Hiburan',
-        subCategory: null,
-        type: 'Keluar',
-        description: 'Langganan Streaming',
-        amount: -150000,
-      },
-    ],
+    required: true,
   },
   totalCount: {
     type: Number,
-    default: 48,
+    default: 0,
   },
 });
 
@@ -103,12 +57,12 @@ const formatCurrency = (val, type) => {
     <div class="overflow-x-auto">
       <table class="w-full text-left border-collapse">
         <thead>
-          <tr class="border-b border-slate-100 bg-slate-50/40 text-[11px] font-bold uppercase tracking-wider text-slate-400">
-            <th class="py-3.5 px-6 font-semibold">TANGGAL</th>
-            <th class="py-3.5 px-6 font-semibold">KATEGORI</th>
-            <th class="py-3.5 px-6 font-semibold text-center">TIPE</th>
-            <th class="py-3.5 px-6 font-semibold">KETERANGAN</th>
-            <th class="py-3.5 px-6 font-semibold text-right">JUMLAH</th>
+          <tr class="border-b border-slate-100 bg-slate-50/40 text-sm font-bold  tracking-wider text-slate-700">
+            <th class="py-3.5 px-6 font-semibold">Tanggal</th>
+            <th class="py-3.5 px-6 font-semibold">Kategori</th>
+            <th class="py-3.5 px-6 font-semibold text-center">Tipe</th>
+            <th class="py-3.5 px-6 font-semibold">Keterangan</th>
+            <th class="py-3.5 px-6 font-semibold text-right">Jumlah</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-slate-100 text-sm">
@@ -118,12 +72,12 @@ const formatCurrency = (val, type) => {
             class="hover:bg-slate-50/60 transition-colors group"
           >
             <!-- Tanggal -->
-            <td class="py-4 px-6 text-slate-500 text-xs sm:text-sm whitespace-nowrap">
+            <td class="py-4 px-6 text-slate-500 text-xs sm:text-sm">
               {{ String(item.tanggal || item.date || '').split('T')[0].split('-').reverse().join('/') }}
             </td>
 
             <!-- Kategori -->
-            <td class="py-4 px-6 whitespace-nowrap">
+            <td class="py-4 px-6">
               <div class="flex items-center gap-2">
                 <span class="font-bold text-slate-800 text-xs sm:text-sm">
                   {{ item.kategori || item.category }}
@@ -138,7 +92,7 @@ const formatCurrency = (val, type) => {
             </td>
 
             <!-- Tipe (Keluar / Masuk badge) -->
-            <td class="py-4 px-6 text-center whitespace-nowrap">
+            <td class="py-4 px-6 text-center">
               <span
                 v-if="String(item.tipe || item.type).toLowerCase() === 'masuk'"
                 class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600"
@@ -162,7 +116,7 @@ const formatCurrency = (val, type) => {
 
             <!-- Jumlah -->
             <td
-              class="py-4 px-6 text-right font-bold text-xs sm:text-sm whitespace-nowrap"
+              class="py-4 px-6 text-right font-bold text-xs sm:text-sm"
               :class="String(item.tipe || item.type).toLowerCase() === 'masuk' ? 'text-emerald-600' : 'text-rose-500'"
             >
               {{ formatCurrency(item.jumlah !== undefined ? item.jumlah : item.amount, String(item.tipe || item.type).toLowerCase() === 'masuk' ? 'Masuk' : 'Keluar') }}

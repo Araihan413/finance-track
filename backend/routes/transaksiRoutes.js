@@ -3,7 +3,7 @@ import pool from '../config/db.js';
 
 const router = express.Router();
 
-// 1. Ambil semua transaksi dengan JOIN kategori, filter & pagination (GET /api/transaksi)
+// Ambil semua transaksi dengan JOIN kategori, filter & pagination (GET /api/transaksi)
 router.get('/', async (req, res) => {
   const { tipe, search, kategori } = req.query;
   const page = parseInt(req.query.page) || 1;
@@ -80,7 +80,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// 2. Ringkasan Dashboard: Total Masuk, Keluar, dan Sisa Saldo (GET /api/transaksi/summary)
+// Ringkasan Dashboard: Total Masuk, Keluar, dan Sisa Saldo (GET /api/transaksi/summary)
 router.get('/summary', async (req, res) => {
   try {
     const [rows] = await pool.query(`
@@ -112,7 +112,7 @@ router.get('/summary', async (req, res) => {
   }
 });
 
-// 3. Tambah Transaksi Baru (POST /api/transaksi)
+// Tambah Transaksi Baru (POST /api/transaksi)
 router.post('/', async (req, res) => {
   const { user_id, kategori_id, kategori, tanggal, tipe, keterangan, jumlah } = req.body;
 
@@ -125,10 +125,10 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    // 1. Tentukan user_id (fallback ke user pertama id: 1 jika belum dikirim)
+    // Tentukan user_id (fallback ke user pertama id: 1 jika belum dikirim)
     const finalUserId = user_id ? Number(user_id) : 1;
 
-    // 2. Tentukan kategori_id
+    // Tentukan kategori_id
     let finalKategoriId = kategori_id ? Number(kategori_id) : null;
     if (!finalKategoriId && kategori) {
       const [katRows] = await pool.query('SELECT id FROM kategori WHERE nama = ? OR id = ? LIMIT 1', [kategori, kategori]);
@@ -141,10 +141,10 @@ router.post('/', async (req, res) => {
       }
     }
 
-    // 3. Tipe harus lowercase sesuai CHECK constraint: 'masuk' atau 'keluar'
+    // Tipe harus lowercase sesuai CHECK constraint: 'masuk' atau 'keluar'
     const finalTipe = String(tipe).toLowerCase() === 'masuk' ? 'masuk' : 'keluar';
 
-    // 4. Jumlah harus positif (> 0)
+    // Jumlah harus positif (> 0)
     const finalJumlah = Math.abs(Number(jumlah));
     if (finalJumlah <= 0) {
       return res.status(400).json({
@@ -153,7 +153,7 @@ router.post('/', async (req, res) => {
       });
     }
 
-    // 5. Format tanggal (YYYY-MM-DD)
+    // Format tanggal (YYYY-MM-DD)
     const finalTanggal = String(tanggal).split('T')[0];
 
     const [result] = await pool.query(
@@ -184,7 +184,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// 4. Edit Transaksi (PUT /api/transaksi/:id)
+// Edit Transaksi (PUT /api/transaksi/:id)
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
   const { kategori_id, kategori, tanggal, tipe, keterangan, jumlah } = req.body;

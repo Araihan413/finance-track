@@ -202,11 +202,11 @@ onMounted(() => {
       <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse">
           <thead>
-            <tr class="border-b border-slate-100 bg-slate-50/50 text-[11px] font-bold uppercase tracking-wider text-slate-400">
-              <th class="py-3.5 px-6 font-semibold w-16">NO</th>
-              <th class="py-3.5 px-6 font-semibold">NAMA KATEGORI</th>
-              <th class="py-3.5 px-6 font-semibold text-center">TIPE</th>
-              <th class="py-3.5 px-6 font-semibold text-center w-28">AKSI</th>
+            <tr class="border-b border-slate-100 bg-slate-50/50 text-sm font-bold tracking-wider text-slate-700">
+              <th class="py-3.5 px-6 font-semibold w-16">No</th>
+              <th class="py-3.5 px-6 font-semibold">Nama Kategori</th>
+              <th class="py-3.5 px-6 font-semibold text-center">Tipe</th>
+              <th class="py-3.5 px-6 font-semibold text-center w-28">Aksi</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-100 text-sm">
@@ -234,7 +234,7 @@ onMounted(() => {
               </td>
 
               <!-- Tipe Kategori -->
-              <td class="py-4 px-6 text-center whitespace-nowrap">
+              <td class="py-4 px-6 text-center">
                 <span
                   v-if="cat.tipe === 'masuk'"
                   class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600"
@@ -252,7 +252,7 @@ onMounted(() => {
               </td>
 
               <!-- Aksi (Edit & Hapus Icon Saja) -->
-              <td class="py-4 px-6 text-center whitespace-nowrap">
+              <td class="py-4 px-6 text-center">
                 <div class="flex items-center justify-center gap-1.5">
                   <button
                     type="button"

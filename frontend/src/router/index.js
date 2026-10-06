@@ -32,12 +32,6 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: '/laporan',
-    name: 'report',
-    component: ReportPage,
-    meta: { requiresAuth: true },
-  },
-  {
     path: '/profil',
     name: 'profile',
     component: ProfilePage,
